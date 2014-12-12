@@ -48,6 +48,7 @@ import com.amazonaws.services.kinesis.model.StreamStatus;
  */
 public class KinesisAppender extends AppenderSkeleton {
   private static final Logger LOGGER = Logger.getLogger(KinesisAppender.class);
+  private String kinesisEndpoint = AppenderConstants.DEFAULT_KINESIS_ENDPOINT;
   private String encoding = AppenderConstants.DEFAULT_ENCODING;
   private int maxRetries = AppenderConstants.DEFAULT_MAX_RETRY_COUNT;
   private int bufferSize = AppenderConstants.DEFAULT_BUFFER_SIZE;
@@ -83,6 +84,7 @@ public class KinesisAppender extends AppenderSkeleton {
    */
   @Override
   public void activateOptions() {
+    LOGGER.debug("Activating KinesisAppender options...");
     if (streamName == null) {
       initializationFailed = true;
       error("Invalid configuration - streamName cannot be null for appender: " + name);
@@ -105,6 +107,7 @@ public class KinesisAppender extends AppenderSkeleton {
     threadPoolExecutor.prestartAllCoreThreads();
     kinesisClient = new AmazonKinesisAsyncClient(new CustomCredentialsProviderChain(), clientConfiguration,
         threadPoolExecutor);
+    kinesisClient.setEndpoint(kinesisEndpoint);
 
     DescribeStreamResult describeResult = null;
     try {
@@ -177,6 +180,7 @@ public class KinesisAppender extends AppenderSkeleton {
     }
     try {
       String message = layout.format(logEvent);
+      LOGGER.debug("Sending data to Kinesis.");
       ByteBuffer data = ByteBuffer.wrap(message.getBytes(encoding));
       kinesisClient.putRecordAsync(new PutRecordRequest().withPartitionKey(UUID.randomUUID().toString())
           .withStreamName(streamName).withData(data), asyncCallHander);
@@ -185,6 +189,27 @@ public class KinesisAppender extends AppenderSkeleton {
       errorHandler.error("Failed to schedule log entry for publishing into Kinesis stream: " + streamName, e,
           ErrorCode.WRITE_FAILURE, logEvent);
     }
+  }
+
+  /**
+   * Configured AWS Region for the Kinesis stream. If none specified, the default is US-East-1.
+   *
+   * @return AWS Region for the Kinesis stream. If none specified, the default is US-East-1
+   */
+  public String getKinesisEndpoint() {
+    return this.kinesisEndpoint;
+  }
+
+  /**
+   * Sets the AWS Region for the Kinesis stream. If none specified, the default is US-East-1
+   *
+   * @see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#ak_region">AWS Regions and Endpoints</a>
+   *
+   * @param kinesisEndpoint AWS Region for expected Kinesis stream
+   */
+  public void setKinesisEndpoint(String kinesisEndpoint) {
+    Validator.validate(!Validator.isBlank(kinesisEndpoint), "kinesisEndpoint cannot be blank");
+    this.kinesisEndpoint = kinesisEndpoint.trim();
   }
 
   /**
