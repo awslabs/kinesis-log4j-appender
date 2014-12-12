@@ -84,7 +84,6 @@ public class KinesisAppender extends AppenderSkeleton {
    */
   @Override
   public void activateOptions() {
-    LOGGER.debug("Activating KinesisAppender options...");
     if (streamName == null) {
       initializationFailed = true;
       error("Invalid configuration - streamName cannot be null for appender: " + name);
@@ -180,7 +179,6 @@ public class KinesisAppender extends AppenderSkeleton {
     }
     try {
       String message = layout.format(logEvent);
-      LOGGER.debug("Sending data to Kinesis.");
       ByteBuffer data = ByteBuffer.wrap(message.getBytes(encoding));
       kinesisClient.putRecordAsync(new PutRecordRequest().withPartitionKey(UUID.randomUUID().toString())
           .withStreamName(streamName).withData(data), asyncCallHander);
