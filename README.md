@@ -23,6 +23,7 @@ Note that the current implementation doesn't insert records in the same order as
 
 | **Configuration** | **Default** | **Description**
 | :----------|:----------:|:----------
+| log4j.appender.[APPENDER_NAME].kinesisEndpoint| kinesis.us-east-1.amazonaws.com | Kinesis Endpoint (AKA AWS Region) in which the stream is available
 | log4j.appender.[APPENDER_NAME].streamName| | Stream name to which data is to be published
 | log4j.appender.[APPENDER_NAME].encoding | UTF-8 | Encoding used to convert log message strings into bytes before sending
 | log4j.appender.[APPENDER_NAME].maxRetries | 3 | Maximum number of retries when calling Kinesis APIs to publish a log message.
