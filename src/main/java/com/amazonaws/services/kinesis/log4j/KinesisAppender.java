@@ -291,7 +291,7 @@ public class KinesisAppender extends AppenderSkeleton {
    * publish them to Kinesis.
    */
   public void setBufferSize(int bufferSize) {
-    Validator.validate(bufferSize > 0, "bufferSize must be >0");
+    Validator.validate(bufferSize > 0, "bufferSize must be > 0");
     this.bufferSize = bufferSize;
   }
 
@@ -311,7 +311,7 @@ public class KinesisAppender extends AppenderSkeleton {
    * buffered events to Kinesis
    */
   public void setThreadCount(int parallelCount) {
-    Validator.validate(parallelCount > 0, "threadCount must be >0");
+    Validator.validate(parallelCount > 0, "threadCount must be > 0");
     this.threadCount = parallelCount;
   }
 
@@ -336,7 +336,7 @@ public class KinesisAppender extends AppenderSkeleton {
    * timeout.
    */
   public void setShutdownTimeout(int shutdownTimeout) {
-    Validator.validate(shutdownTimeout > 0, "shutdownTimeout must be >0");
+    Validator.validate(shutdownTimeout > 0, "shutdownTimeout must be > 0");
     this.shutdownTimeout = shutdownTimeout;
   }
 

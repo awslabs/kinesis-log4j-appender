@@ -309,7 +309,7 @@ public class KinesisAppenderTest {
     @Test
     public void testSetBufferSizeThrowsExceptionWithZero() {
         exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("bufferSize must be >0");
+        exception.expectMessage("bufferSize must be > 0");
         appender.setBufferSize(0);
     }
 
@@ -328,7 +328,7 @@ public class KinesisAppenderTest {
     @Test
     public void testSetThreadCountThrowsExceptionWithZero() {
         exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("threadCount must be >0");
+        exception.expectMessage("threadCount must be > 0");
         appender.setThreadCount(0);
     }
 
@@ -348,7 +348,7 @@ public class KinesisAppenderTest {
     @Test
     public void testSetShutdownTimeoutThrowsExceptionWithZero() {
         exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("shutdownTimeout must be >0");
+        exception.expectMessage("shutdownTimeout must be > 0");
         appender.setShutdownTimeout(0);
     }
 
