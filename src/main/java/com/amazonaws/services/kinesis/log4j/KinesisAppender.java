@@ -247,8 +247,8 @@ public class KinesisAppender extends AppenderSkeleton {
    *          encoding for expected log messages
    */
   public void setEncoding(String charset) {
-    Validator.validate(!Validator.isBlank(encoding), "encoding cannot be blank");
-    this.encoding = encoding.trim();
+    Validator.validate(!Validator.isBlank(charset), "encoding cannot be blank");
+    this.encoding = charset.trim();
   }
 
   /**

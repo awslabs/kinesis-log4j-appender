@@ -268,7 +268,6 @@ public class KinesisAppenderTest {
     /**
      * Verifies the appender throws an exception when encoding is not defined.
      */
-    @Ignore("Currently fails due to a bug in the setter. Will fix in a separate commit.")
     @Test
     public void testSetEncodingThrowsExceptionWithEmptyString() {
         exception.expect(IllegalArgumentException.class);
@@ -281,7 +280,6 @@ public class KinesisAppenderTest {
      */
     @Test
     public void testSetEncodingWithValidEncoding() {
-        // should eventually fail but might not...
         appender.setEncoding(AppenderConstants.DEFAULT_ENCODING);
         assertThat(appender.getEncoding(), is(AppenderConstants.DEFAULT_ENCODING));
     }
