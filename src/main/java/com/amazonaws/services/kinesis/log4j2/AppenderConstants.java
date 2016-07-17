@@ -12,7 +12,7 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  ******************************************************************************/
-package com.amazonaws.services.kinesis.log4j;
+package com.amazonaws.services.kinesis.log4j2;
 
 import com.amazonaws.regions.Regions;
 
@@ -20,7 +20,7 @@ import com.amazonaws.regions.Regions;
  * Contains constants and default configuration values for the appender
  */
 public class AppenderConstants {
-  public static final String USER_AGENT_STRING = "kinesis-log4j-appender/1.0.1";
+  public static final String USER_AGENT_STRING = "kinesis-log4j2-appender/1.0.1";
   // Default values
   public static final String DEFAULT_ENCODING = "UTF-8";
   public static final int DEFAULT_MAX_RETRY_COUNT = 3;
