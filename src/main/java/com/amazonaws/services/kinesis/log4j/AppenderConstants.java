@@ -22,6 +22,7 @@ import com.amazonaws.regions.Regions;
 public class AppenderConstants {
   public static final String USER_AGENT_STRING = "kinesis-log4j-appender/1.0.1";
   // Default values
+  public static final String DEFAULT_KINESIS_ENDPOINT = "kinesis.us-east-1.amazonaws.com";
   public static final String DEFAULT_ENCODING = "UTF-8";
   public static final int DEFAULT_MAX_RETRY_COUNT = 3;
   public static final long DEFAULT_BACKOFF_INTERVAL_MSEC = 100;
