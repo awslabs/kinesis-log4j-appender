@@ -20,7 +20,7 @@
 
   <groupId>com.amazonaws</groupId>
   <artifactId>kinesis-log4j-appender</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.2</version>
 
   <name>Log4j Appender for pushing logs to Kinesis</name>
   <url>https://github.com/awslabs/kinesis-log4j-appender.git</url>
@@ -40,6 +40,46 @@
           <showWarnings>true</showWarnings>
           <optimize>false</optimize>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit>
+                      <counter>COMPLEXITY</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>0.50</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -70,6 +110,20 @@
       <artifactId>log4j</artifactId>
       <version>${log4j.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.jmockit</groupId>
+      <artifactId>jmockit</artifactId>
+      <version>${jmockit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <properties>
@@ -80,7 +134,10 @@
     <java.source.encoding>${general.encoding}</java.source.encoding>
     <aws-java-sdk.version>1.7.0</aws-java-sdk.version>
     <log4j.version>1.2.16</log4j.version>
+    <jmockit.version>1.14</jmockit.version>
+    <junit.version>4.12</junit.version>
     <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+    <jacoco-maven-plugin.version>0.7.2.201409121644</jacoco-maven-plugin.version>
     <maven-shade-plugin.version>2.2</maven-shade-plugin.version>
   </properties>
 </project>
