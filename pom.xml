@@ -61,7 +61,7 @@
 
     <dependency>
       <groupId>com.amazonaws</groupId>
-      <artifactId>aws-java-sdk</artifactId>
+      <artifactId>aws-java-sdk-kinesis</artifactId>
       <version>${aws-java-sdk.version}</version>
     </dependency>
 
@@ -78,7 +78,7 @@
     <!-- JAVA -->
     <java.version>1.7</java.version>
     <java.source.encoding>${general.encoding}</java.source.encoding>
-    <aws-java-sdk.version>1.7.0</aws-java-sdk.version>
+    <aws-java-sdk.version>1.11.125</aws-java-sdk.version>
     <log4j.version>1.2.16</log4j.version>
     <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
     <maven-shade-plugin.version>2.2</maven-shade-plugin.version>

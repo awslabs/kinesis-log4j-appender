@@ -1,0 +1,10 @@
+language: java
+deploy:
+  provider: releases
+  api_key:
+    secure: nMJZvhkRKvhGCXeBUsW9KX7VmHh9Fc6BBTTvUd59FRDB4AW6BYGSi9isBlvZrEWfcNU1yLd2lY9upK8npA6YhFWQfFGfZv+xMHpmdeaSzkWLTNKncAmUg1AxZOSGXP/E1orlCKyAU4e56donhlvRxl/gbrkjCVFJt2LfOOukYIuZ9rKQCNc6+3uZxrLImN/uFzQcTe34WNLDe1R+3k7IeWBDB+H4hnzVR/QXjPPxFEAlHgXtOdkyG0vVr6g+GjdUehuvZ+96mutXtkUthJZarcDnmqvgd8VUwxlrypp80NFhzMqM1k99zrFTsPhaVutwo6Zzu6ggyMM2OoS8ziFoNJbJXz+7XAAfY7ocAmJneUsNhCgs+MkL3v8E3f82FnRnvyaorkkUlNDEnuhbygsIArPM+MObpvO2CO4A1P9aam4BMy7IM9f4SSV0ewlif7Hm8grJmHQRC5RShv+/ts70qfZ9R/7wMfQthKAvgttCcjtlebv6OXoHuOyh43TPe3FzYi6/MImhIySj68EeF+W/2hgUV23BQSX90CIBTKZpNrOFkxu42bpQ5TssbIu38Ju1VzcZZuzLSDMJoZgrWXpgssgCS+qTmWr55hYJRL3ZTdKhFwnz+Bm97o7uZBOdvtjNMFa1uCjpLXfSrcCxxdn4nW7JtIBES0kLgdPYnpsUk8Y=
+  file: target/kinesis-log4j-appender-1.0.0.jar
+  skip_cleanup: true
+  on:
+    repo: micw/kinesis-log4j-appender
+    tags: true
