@@ -12,9 +12,10 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  ******************************************************************************/
-package com.amazonaws.services.kinesis.log4j.helpers;
+package com.amazonaws.services.kinesis.log4j2.helpers;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormat;
@@ -28,7 +29,7 @@ import com.amazonaws.services.kinesis.model.PutRecordResult;
  * succeeded or failed since the beginning
  */
 public class AsyncPutCallStatsReporter implements AsyncHandler<PutRecordRequest, PutRecordResult> {
-  private static Logger logger = Logger.getLogger(AsyncPutCallStatsReporter.class);
+  private static Logger logger =  (org.apache.logging.log4j.core.Logger) LogManager.getLogger(AsyncPutCallStatsReporter.class);
   private String appenderName;
   private long successfulRequestCount;
   private long failedRequestCount;

@@ -20,9 +20,9 @@
 
   <groupId>com.amazonaws</groupId>
   <artifactId>kinesis-log4j-appender</artifactId>
-  <version>1.0.0</version>
+  <version>2.0.0</version>
 
-  <name>Log4j Appender for pushing logs to Kinesis</name>
+  <name>Log4j2 Appender for pushing logs to Kinesis</name>
   <url>https://github.com/awslabs/kinesis-log4j-appender.git</url>
 
   <build>
@@ -65,11 +65,36 @@
       <version>${aws-java-sdk.version}</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>${log4j.version}</version>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.5</version>
     </dependency>
+
+  <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+  <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.5</version>
+  </dependency>
+
+      <!-- https://mvnrepository.com/artifact/junit/junit -->
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.12</version>
+          <scope>test</scope>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/junit/junit -->
+      <dependency>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-all</artifactId>
+          <version>1.10.19</version>
+          <scope>test</scope>
+      </dependency>
+
   </dependencies>
 
   <properties>
@@ -79,7 +104,7 @@
     <java.version>1.7</java.version>
     <java.source.encoding>${general.encoding}</java.source.encoding>
     <aws-java-sdk.version>1.7.0</aws-java-sdk.version>
-    <log4j.version>1.2.16</log4j.version>
+    <log4j.version>2.4</log4j.version>
     <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
     <maven-shade-plugin.version>2.2</maven-shade-plugin.version>
   </properties>

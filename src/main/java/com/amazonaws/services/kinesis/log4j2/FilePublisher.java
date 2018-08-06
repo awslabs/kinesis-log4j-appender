@@ -12,40 +12,38 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  ******************************************************************************/
-package com.amazonaws.services.kinesis.log4j;
+package com.amazonaws.services.kinesis.log4j2;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Enumeration;
 
-import org.apache.log4j.Appender;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.Appender;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormat;
 
 /**
  * {@code FilePublisher} can be used to push log files to Kinesis stream
- * directly. It reads input file line by line and uses log4j to write into a
+ * directly. It reads input file line by line and uses log4j2 to write into a
  * logger instance by name <b>KinesisLogger</b>. Implementation assumes that
  * <b>KinesisLogger</b> is configured to log into a Kinesis stream.
  * 
  * Sample configuration is available in
- * src/main/resources/log4j-sample.properties
+ * src/main/resources/log4j2-sample.properties
  */
 public class FilePublisher {
-  private static final Logger LOGGER = Logger.getLogger(FilePublisher.class);
+  private static final Logger LOGGER = (org.apache.logging.log4j.core.Logger) LogManager.getLogger(FilePublisher.class);
   private static final long SLEEP_INTERVAL = 5000;
 
   private static long getBufferedRecordsCountFromKinesisAppenders() {
     long bufferedRecordsCount = 0;
-    Enumeration allAppenders = LOGGER.getAllAppenders();
-    while (allAppenders.hasMoreElements()) {
-      Appender appender = (Appender) allAppenders.nextElement();
+    for(Appender appender:LOGGER.getAppenders().values()){
       if (appender instanceof KinesisAppender) {
-        bufferedRecordsCount += ((KinesisAppender) appender).getTaskBufferSize();
+        bufferedRecordsCount += ((KinesisAppender) appender).getBufferSize();
       }
     }
     return bufferedRecordsCount;
@@ -66,7 +64,7 @@ public class FilePublisher {
       System.exit(2);
     }
 
-    Logger kinesisLogger = Logger.getLogger("KinesisLogger");
+    Logger kinesisLogger = (org.apache.logging.log4j.core.Logger) LogManager.getLogger("KinesisLogger");
     int i = 0;
     DateTime startTime = DateTime.now();
     BufferedReader reader = new BufferedReader(new FileReader(logFile));
@@ -82,7 +80,7 @@ public class FilePublisher {
     reader.close();
     long bufferedRecordsCount = getBufferedRecordsCountFromKinesisAppenders();
     while (bufferedRecordsCount > 0) {
-      LOGGER.info("Publisher threads within log4j appender are still working on sending " + bufferedRecordsCount
+      LOGGER.info("Publisher threads within log4j2 appender are still working on sending " + bufferedRecordsCount
           + " buffered records to Kinesis");
       try {
         Thread.sleep(SLEEP_INTERVAL);
